@@ -1,0 +1,43 @@
+# ------------------------------------------------------------------------------
+# GIT CONFIGURATION TEMPLATE
+# ------------------------------------------------------------------------------
+#
+# DESCRIPTION:
+# This .gitconfig file uses conditional includes to load different Git
+# configurations based on the location of the repository. This is a powerful
+# feature to manage different identities (e.g., work, personal) seamlessly.
+#
+# HOW IT WORKS:
+# The `includeIf` directive checks if the current repository's path matches a
+# certain pattern (`gitdir:`). If it does, it includes the specified .gitconfig
+# file. This allows you to set specific user names, emails, or even different
+# aliases for different projects or clients.
+#
+# SETUP:
+# 1.  Create separate .gitconfig_include files for each context (e.g., one for
+#     work, one for personal projects).
+# 2.  In each of those files, define the specific settings. For example, in
+#     your work-related .gitconfig_include, you would set your work email:
+#
+#     [user]
+#         name = Your Name
+#         email = your.work.email@example.com
+#
+# 3.  Update the paths in this file to point to your actual project directories.
+
+# If the repository is located anywhere inside the `~/path/to/work-projects/` directory,
+# load the specific git configuration for that context.
+[includeIf "gitdir:~/path/to/work-projects/"]
+    path = ~/path/to/work-projects/.gitconfig_include
+
+# If the repository is in `~/path/to/personal-projects/`, load the personal config.
+[includeIf "gitdir:~/path/to/personal-projects/"]
+    path = ~/path/to/personal-projects/.gitconfig_include
+
+# You can have as many of these as you need. For example, for a specific client:
+[includeIf "gitdir:~/path/to/client-x-projects/"]
+    path = ~/path/to/client-x-projects/.gitconfig_include
+
+# Or for another client or organization:
+[includeIf "gitdir:~/path/to/another-orgs-projects/"]
+    path = ~/path/to/another-orgs-projects/.gitconfig_include
